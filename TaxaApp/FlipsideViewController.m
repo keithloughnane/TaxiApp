@@ -10,9 +10,15 @@
 
 
 @implementation FlipsideViewController
-
+//@synthesize owner;
 @synthesize delegate=_delegate;
-
+-(int)initWithOwner : (id) iowner
+{
+        NSLog(@"Initing Flipside");
+	owner  = iowner;
+    
+	return 0;
+}
 - (void)dealloc
 {
     [super dealloc];

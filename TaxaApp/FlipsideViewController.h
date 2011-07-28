@@ -11,9 +11,9 @@
 @protocol FlipsideViewControllerDelegate;
 
 @interface FlipsideViewController : UIViewController {
-
+	id owner;
 }
-
+-(int)initWithOwner : (id) owner;
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
 
 - (IBAction)done:(id)sender;
