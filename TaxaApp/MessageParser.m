@@ -27,12 +27,12 @@
 }
 -(NSString *) getSetPositionMsg
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=setPosition&id=1&llong=123.456&llat=987.654"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=setPosition&id=1&llong=%f&llat=%f",[owner getLong],[owner getLat]];
     return msgMsg;
 }
 -(NSString *) getReqPickupMsg
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=requestPickup&id=1&llong=123.456&llat=987.654"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=requestPickup&id=1&llong=%f&llat=%f",[owner getLong],[owner getLat]];
     return msgMsg;
 }
 -(NSString *) getAccPickupMsg

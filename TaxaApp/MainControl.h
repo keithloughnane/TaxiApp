@@ -20,12 +20,14 @@
     //DataBaseControler *myDBControler;
     LocationGetter *myLocGetter;
     netCon *myNetCon;
-   // MainViewController *myMainViewCon;
+    id owner;
     FlipsideViewController * myFlipSideCon;
     MessageParser * myMsgParser;
     CurrentPickup *myCurrentPickup;
     SettingsHandler *mySettingsHandler;
     MapControl *myMapControl;
+    double curLong, curLat, curVerr;
+
 }
 
 //@property (retain, nonatomic) DataBaseControler *myDBControler;
@@ -38,8 +40,11 @@
 @property (retain, nonatomic) SettingsHandler *mySettingsHandler;
 @property (retain, nonatomic) MapControl *myMapControl;
 
--(int)init;
+-(int)init:(id *) iMainView;
+-(int) reqPickup;
 -(int) sendToNet:(NSString *)msg;
 -(int)rcvPickupReqID:(int)ID llong:(double)ilong llat:(double)ilat;
+-(double) getLong;
+-(double) getLat;
 
 @end

@@ -32,14 +32,20 @@ MapControl *myMapControl;
 @synthesize mySettingsHandler;
 @synthesize myMapControl;
 
--(int)init;
+-(int)setMainView:(id *) iMainView
 {
-
+    owner = iMainView;
+}
+-(int)init:(id *) iMainView;
+{
+   // mode = 0;
 	//myDBControler = [DataBaseControler alloc];
 	//[myDBControler initWithOwner:self];
     
     NSLog(@"Initing MainControl");
-
+   owner = iMainView;
+    
+    
     myLocGetter  = [LocationGetter alloc];
     myNetCon = [netCon alloc];
     //myMainViewCon = [MainViewController alloc];
@@ -51,7 +57,9 @@ MapControl *myMapControl;
     
     [myLocGetter initWithOwner:self];
     [myNetCon initWithOwner:self];
-    //[myMainViewCon initWithOwner:self];
+    
+    
+    [owner initWithOwner:self];
     [myFlipSideCon initWithOwner:self];
     [myMsgParser initWithOwner:self];
     [myCurrentPickup initWithOwner:self];
@@ -79,8 +87,13 @@ MapControl *myMapControl;
     
     [myCurrentPickup clear];
     [myCurrentPickup setUpMasterModeID:ID llong:ilong llat:ilat];
-    [self askUserConfimPickup];
+    [self askUserConfirmPickup];
     
+    return 0;
+}
+-(int) askUserConfirmPickup
+{
+    [owner reqPickup:@"Recieved pickup Request Accept?"];
     return 0;
 }
 
@@ -88,7 +101,7 @@ MapControl *myMapControl;
 {
      NSLog(@"MSTRRECPICKACC:%d",iid);
     
-    [myCurrentPickup setAccesptedClientMode];
+    [myCurrentPickup setAcceptedClientMode];
     return 0;
 }
     
@@ -99,6 +112,14 @@ MapControl *myMapControl;
     [self informUser:@"Sorry no cab enroute:%@",imsg];
     [myCurrentPickup clear];
     return 0;
+}
+-(int) reqPickup
+{
+    NSLog(@"Main->ReqPickup");
+        NSString * tempString = [NSString stringWithFormat:@"%@",[myMsgParser getReqPickupMsg]];
+    
+    
+    [self sendToNet:tempString];
 }
     
 
@@ -125,6 +146,11 @@ MapControl *myMapControl;
      //TODO Vibrate
     return 0;
 }
+
+-(int) acceptPickupReq
+{
+    NSLog(@"Accept pickup req called");
+}
     
 ///server.php?msgtype=getMessages&id=1
 
@@ -140,6 +166,29 @@ MapControl *myMapControl;
     NSLog(@"3");
     [myNetCon sendData:tempString];
     NSLog(@"4");
+    return 0;
+}
+-(double) getLong
+{
+    return curLong;
+    
+}
+-(double) getLat
+{
+    return curLat;
+
+}
+-(int)getsLoc : (double) locLat: (double) locLong : (double) locAlt: (double) LocHAccuracy :  (double) LocVAccuracy
+{
+    NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
+    
+    curLat = locLat;
+    curLong = locLong;
+    curVerr = LocVAccuracy;
+    	[owner getsLoc :  locLat: locLong:locAlt:LocHAccuracy:LocVAccuracy];
+   // [owner upDateLocLong:locLong Lat:locLat Verr:LocVAccuracy];
+    
+    
     return 0;
 }
 

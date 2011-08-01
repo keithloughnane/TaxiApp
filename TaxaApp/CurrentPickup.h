@@ -11,6 +11,12 @@
 
 @interface CurrentPickup : NSObject {
     	id owner;
+    int pickupId;
+    int pickupStatus; //-1 = nothing setup, 0= setup but not accepted or reqected waiting, 1= accepted. minus values other than -1 are errors.
+    double llong, llat;
+    double ETA;
+    
 }
 -(int)initWithOwner : (id) owner;
+
 @end
