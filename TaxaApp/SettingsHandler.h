@@ -10,8 +10,13 @@
 #define optionsFilename @"config.plist"
 
 @interface SettingsHandler : NSObject {
-    	id owner;
+    id owner;
+
+    int mode;
 }
+
+    
+
 -(int)initWithOwner : (id) owner;
 - (NSString *) optionsFilePath;
 -(int)SaveOptions;

@@ -18,6 +18,8 @@
 
 @interface MainControl : NSObject {
     //DataBaseControler *myDBControler;
+    int mode;//0=cleint; 1=master/taxi
+    
     LocationGetter *myLocGetter;
     netCon *myNetCon;
     id owner;

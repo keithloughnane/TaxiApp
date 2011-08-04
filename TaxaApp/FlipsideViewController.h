@@ -12,7 +12,13 @@
 
 @interface FlipsideViewController : UIViewController {
 	id owner;
+    
+    IBOutlet UISegmentedControl *mySegBtn;
 }
+@property (nonatomic,retain) UIButton *btnCan;
+
+-(IBAction)segChange:(id)sender;
+
 -(int)initWithOwner : (id) owner;
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
 
@@ -21,6 +27,9 @@
 @end
 
 
+
 @protocol FlipsideViewControllerDelegate
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
+
+
 @end

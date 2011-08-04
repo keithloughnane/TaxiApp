@@ -31,7 +31,11 @@
     
     // Release any cached data, images, etc. that aren't in use.
 }
-
+-(IBAction)segChange:(id)sender
+{
+    NSLog(@"MySegBTn = %d",[mySegBtn selectedSegmentIndex]);
+    [owner setMode:[mySegBtn selectedSegmentIndex]];
+}
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad

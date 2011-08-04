@@ -65,6 +65,7 @@ MapControl *myMapControl;
     [myCurrentPickup initWithOwner:self];
     [mySettingsHandler initWithOwner:self];
     [myMapControl initWithOwner:self];
+    //[mySettingsHandler SaveOptions];
     [mySettingsHandler LoadOptions];
     //Todo get IP from config and set
     [myNetCon init];
@@ -80,6 +81,10 @@ MapControl *myMapControl;
     NSLog(@"Master RCV NET:%@",str);
     [myMsgParser recieveMsg:str];
     return 0;
+}
+-(int) setMode:(int)iMode
+{
+    [mySettingsHandler setMode:iMode];
 }
 -(int)rcvPickupReqID:(int)ID llong:(double)ilong llat:(double)ilat;
 {
@@ -182,10 +187,13 @@ MapControl *myMapControl;
 {
     NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
     
+    if(!([myCurrentPickup getStatus] == -1))
+    {
     curLat = locLat;
     curLong = locLong;
     curVerr = LocVAccuracy;
     	[owner getsLoc :  locLat: locLong:locAlt:LocHAccuracy:LocVAccuracy];
+    }
    // [owner upDateLocLong:locLong Lat:locLat Verr:LocVAccuracy];
     
     

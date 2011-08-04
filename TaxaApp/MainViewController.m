@@ -51,16 +51,17 @@
 	[myMap setRegion:region animated:TRUE];	
     [myMap setCenterCoordinate:location];
     
-    
+    [self showInfo:self];
     
     [super viewDidLoad];
 }
 -(int)getsLoc : (double) locLat: (double) locLong : (double) locAlt: (double) LocHAccuracy :  (double) LocVAccuracy
 {
         NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
+   // NSLog(<#NSString *format, ...#>)
 	NSLog(@"GETS LOC METHOD CALLED %f, %f",locLat,locLong);
     
-    
+   // [owner getsLoc:locLat :locLong :locAlt :LocHAccuracy :LocVAccuracy];
     
     
 	//NSLog(@"Undating lable");
@@ -80,6 +81,10 @@
 	//location 
 	//locStatus =[NSString stringWithFormat:@"Location:\n\tlong:%f\n\tlat:%f",locLong,locLat];
 	//statusText.text = [NSString stringWithFormat:@"%f %@ %@",[self getTime],locStatus,accStatus];
+    
+    [self upDateLocLong:locLong Lat:locLat:LocHAccuracy];
+    
+    
 	return 0;
 }
 

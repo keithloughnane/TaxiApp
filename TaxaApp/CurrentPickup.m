@@ -30,7 +30,15 @@
     return 0;
 
 }
-
+-(int) getStatus
+{
+    return pickupStatus;
+}
+-(int) setStatus:(int)iStatus
+{
+    pickupId = iStatus;
+    return 0;
+}
 
 - (int) setUpClientModeID:(int)ID llong:(double)ilong llat:(double)ilat
 {
