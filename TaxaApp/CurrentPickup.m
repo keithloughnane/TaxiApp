@@ -16,6 +16,10 @@
         NSLog(@"Initing CurrentPickup");
 	owner  = iowner;
     
+    pickupId = -2;
+    
+    NSLog(@"CurrentPickup ID set to %d",[self getID]);
+    
 	return 0;
 }
 -(int) setUpMasterModeID:(int)ID llong:(double)ilong llat:(double)ilat
@@ -36,7 +40,7 @@
 }
 -(int) setStatus:(int)iStatus
 {
-    pickupId = iStatus;
+    pickupStatus = iStatus;
     return 0;
 }
 
@@ -60,7 +64,11 @@ return 0;
 {
     return llat;
 }
-
+-(int)getID
+{
+    NSLog(@"Getting Pickup ID %d",pickupId);
+    return pickupId;
+}
 
 
 

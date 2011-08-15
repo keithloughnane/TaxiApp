@@ -24,19 +24,26 @@
         NSLog(@"Initing Netcon");
 	owner  = iowner;
     
+        serverAdd = @"127.0.0.1";
+    
 	return 0;
 }
+
+
 
 -(int)init
 // [myAccelGetter initWithOwner:self];	
 {
 	
-	NSLog(@"Trying to connect");
+	NSLog(@"Trying to connect to %@", serverAdd);
 	mySocket =  [[AsyncSocket alloc] initWithDelegate:self];
 	if(
 	   
 	  // NSString *ipAdd = @"192.168.2.4";
-	   [mySocket connectToHost:@"192.168.2.4" onPort:80 error:[NSError alloc]])
+       
+       
+       
+	   [mySocket connectToHost:serverAdd onPort:80 error:[NSError alloc]])
 		
 		
 		//NSLog(@"Connected to host %@",ipAdd);
@@ -70,6 +77,16 @@
 	//[d initWithBytes: (Byte)@"hello" lenght:5];
 
 	
+    if(![mySocket isConnected])
+    {
+        NSLog(@"Socket not connected Trying Reconnect");
+        if([mySocket connectToHost:serverAdd onPort:80 error:[NSError alloc]])
+        {
+            [owner showMsg:@"Can not connect to server"];
+        }
+    }
+    
+    
     [mySocket writeData:d withTimeout:10 tag:(long)2.3];
     
    // [mySocket readDataToData:[AsyncSocket ZeroData] withTimeout:30 tag:0];

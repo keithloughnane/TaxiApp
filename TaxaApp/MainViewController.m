@@ -51,6 +51,20 @@
 	[myMap setRegion:region animated:TRUE];	
     [myMap setCenterCoordinate:location];
     
+    
+    
+   // DisplayMap *ann = [[DisplayMap alloc] init]; 
+//ann.title = @" Pin 1";
+   // ann.subtitle = @"The Subtitle!"; 
+    //ann.coordinate = region.center; 
+    //[mapView addAnnotation:ann];
+    MKPlacemark *pickPlace = [[MKPlacemark alloc]initWithCoordinate:location addressDictionary:[[NSDictionary alloc] init]];
+	[myMap addAnnotation:pickPlace];
+
+
+    
+    
+    
     [self showInfo:self];
     
     [super viewDidLoad];
@@ -114,7 +128,7 @@
 {    
     FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
     controller.delegate = self;
-    
+    [controller setOwner:owner];
     controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:controller animated:YES];
     
@@ -125,7 +139,7 @@
 {
     NSLog(@"Accept clicked");
     if(mode == 1)
-    [owner reqPickup];
+        [owner reqPickup];
     if(mode == 2)
         [owner acceptPickupReq];
     
@@ -201,4 +215,15 @@
     [super dealloc];
 }
 
+- (int) showMsg:(NSString *)msg
+{
+    NSLog(@"View recieved message");
+    mode = 3;
+    
+    [myTextView setText:msg];
+    [myTextView setHidden:false];
+    [btnAcc setHidden:false];
+    
+    
+}
 @end

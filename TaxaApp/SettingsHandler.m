@@ -15,12 +15,16 @@
 -(int)initWithOwner : (id) iowner
 {
         NSLog(@"Initing Settings Handler");
-	owner  = iowner;
+       owner  = iowner;
+  mode = 0;
     
 	return 0;
 }
 -(int)getMode
 {
+    NSLog(@"Get Mode");
+    [self LoadOptions];
+    NSLog(@"Setting handeler return mode = %d",mode);
     return mode;
     
 }
@@ -38,9 +42,9 @@
 	/////
 	NSLog(@"options file path");
 	NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES);
-	NSLog(@"2");
+	NSLog(@"S2");
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSLog(@"3");
+	NSLog(@"S3");
 	
 	//tempString =[[NSString alloc] initWithCString: "\nSetting up path\n"];
 	//newString = [newString stringByAppendingString:tempString];	
@@ -48,9 +52,9 @@
 	//tempString =[[NSString alloc] initWithCString: documentsDirectory];
 	//newString = [newString stringByAppendingString:documentsDirectory];	
 	
-	NSLog(@"4");
+	NSLog(@"S4");
 	NSString *tempPath = [[NSString alloc] initWithCString: "/options.plist"];
-	NSLog(@"5");
+	NSLog(@"S5");
 	//[paths release];
 	return [documentsDirectory stringByAppendingPathComponent:tempPath];	
 	
@@ -60,6 +64,7 @@
 
 -(int) setMode:(int)iMode
 {
+    NSLog(@"mode being set to %d",iMode);
     mode = iMode;
     [self SaveOptions];
 }
@@ -167,7 +172,7 @@
 	//LEVEL NUMBER
 	NSLog(@"setting up number");
 	//NSLog(@"saving Level no (%i)",level);
-	myNo = [NSNumber numberWithInt:6];
+	myNo = [NSNumber numberWithInt:mode];
 	//tempString = [NSString stringWithFormat:@"%i",x[i]];	
 	//newString = [newString stringByAppendingString:tempString];	
 	//[array addObject:myNo];
@@ -201,15 +206,17 @@
 	//debugText.text = newString;	
 	NSLog(@"writing...");
 	[array writeToFile:tmpPath atomically:YES];
+    NSLog(@"about to realease array");
 	[array release];
-	
+	NSLog(@"About to do file swap");
     
 	//if(level!=0||level!=19)
 	{
         [[NSFileManager defaultManager] removeItemAtPath:path  error:nil];
         [[NSFileManager defaultManager] moveItemAtPath:tmpPath toPath:path error:nil];
 	}
-	[path release];
+    //NSLog(@"about to release path");
+	//[path release];
 	return 0;
 }
 

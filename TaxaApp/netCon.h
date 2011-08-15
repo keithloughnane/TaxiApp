@@ -12,6 +12,8 @@
 @interface netCon : NSObject {
 	AsyncSocket * mySocket;
     	id owner;
+    
+        NSString * serverAdd;
 }
 
 

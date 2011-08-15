@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "SettingsHandler.h"
 
 @protocol FlipsideViewControllerDelegate;
 
 @interface FlipsideViewController : UIViewController {
 	id owner;
-    
+    //SettingsHandler *mySettingsHandler;
     IBOutlet UISegmentedControl *mySegBtn;
 }
 @property (nonatomic,retain) UIButton *btnCan;
-
+//@property (retain, nonatomic) SettingsHandler *mySettingsHandler;
 -(IBAction)segChange:(id)sender;
 
 -(int)initWithOwner : (id) owner;

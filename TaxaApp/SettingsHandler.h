@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #define optionsFilename @"config.plist"
 
 @interface SettingsHandler : NSObject {

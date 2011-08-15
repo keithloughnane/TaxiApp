@@ -33,8 +33,10 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation 
 {
-	
-	self.startingPoint = newLocation;
+    NSLog(@"didUpdateLoc called");
+	//#if TARGET_ IPHONE_SIMULATOR
+	//NSLog(@"is in sim");
+    self.startingPoint = newLocation;
 	//owner statusText.text = [[NSString alloc] initWithFormat:@"LOC \nlat:%g\nlong:%g\nalt:%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude,newLocation.altitude];
 	////NSLog([[NSString alloc] initWithFormat:@"LOC \nlat:%g\nlong:%g\nalt:%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude,newLocation.altitude]);
 	//NSLog(@"LOC RECEIVED >> %@", temp);

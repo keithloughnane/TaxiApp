@@ -16,43 +16,48 @@
         NSLog(@"Initing MessageParser");
 	owner  = iowner;
     
+    //[owner setUserID:-1];
+    
+    NSLog(@"UserID = %d",[owner getUserID]);
+     NSLog(@"PickUpID = %d",[owner getCurPickupID]);
+    
 	return 0;
 }
 -(NSString *) getGetMessage
 {
     ///server.php?msgtype=getMessages&id=1
 
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=getMessages&id=1"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=getMessages&id=%d",[owner getUserID]];
     return msgMsg;
 }
 -(NSString *) getSetPositionMsg
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=setPosition&id=1&llong=%f&llat=%f",[owner getLong],[owner getLat]];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=setPosition&id=%d&llong=%f&llat=%f",[owner getUserID],[owner getLong],[owner getLat]];
     return msgMsg;
 }
 -(NSString *) getReqPickupMsg
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=requestPickup&id=1&llong=%f&llat=%f",[owner getLong],[owner getLat]];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=requestPickup&id=%d&llong=%f&llat=%f",[owner getUserID],[owner getLong],[owner getLat]];
     return msgMsg;
 }
 -(NSString *) getAccPickupMsg
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=acceptPickup&id=1&pickupid=0"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=acceptPickup&id=%d&pickupid=-1",[owner getUserID]];
     return msgMsg;
 }
 -(NSString *) getRefusePickupMsg
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=refusePickup&id=1&pickupid=0"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=refusePickup&id=%d&pickupid=-1",[owner getUserID]];
     return msgMsg;
 }
 -(NSString *) getGetActivate
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgType=activate&id=1"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=activate&id=%d&mode=%d",[owner getUserID],[owner getOpMode]];
     return msgMsg;
 }
 -(NSString *) getGetDeacitivate
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgType=deActivate&id=1"];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=deActivate&id=%d",[owner getUserID]];
     return msgMsg;
 }
 

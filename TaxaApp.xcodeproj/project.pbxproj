@@ -41,7 +41,6 @@
 		6C62E94513D8977C0010ED11 /* MapControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C62E94413D8977C0010ED11 /* MapControl.m */; };
 		6C62E94B13D897C70010ED11 /* SettingsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C62E94A13D897C70010ED11 /* SettingsHandler.m */; };
 		6C62E94E13D897D80010ED11 /* CurrentPickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C62E94D13D897D80010ED11 /* CurrentPickup.m */; };
-		6C81979E13DDCB1000F1EFEE /* good in Resources */ = {isa = PBXBuildFile; fileRef = 6C81979D13DDCB1000F1EFEE /* good */; };
 		6CDCD1AD13E9843B009D0451 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CDCD1AC13E9843B009D0451 /* Info.plist */; };
 		6CDCD1B613E98614009D0451 /* options.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CDCD1B513E98614009D0451 /* options.plist */; };
 /* End PBXBuildFile section */
@@ -104,7 +103,6 @@
 		6C62E94A13D897C70010ED11 /* SettingsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsHandler.m; sourceTree = "<group>"; };
 		6C62E94C13D897D80010ED11 /* CurrentPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentPickup.h; sourceTree = "<group>"; };
 		6C62E94D13D897D80010ED11 /* CurrentPickup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentPickup.m; sourceTree = "<group>"; };
-		6C81979D13DDCB1000F1EFEE /* good */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = good; path = ../../../../../../../good; sourceTree = "<group>"; };
 		6CDCD1AC13E9843B009D0451 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CDCD1B513E98614009D0451 /* options.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = options.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,7 +182,6 @@
 				6C15851B13D9AC7D005C3697 /* LocationGetter.m */,
 				6C15851C13D9AC7D005C3697 /* netCon.h */,
 				6C15851D13D9AC7D005C3697 /* netCon.m */,
-				6C81979D13DDCB1000F1EFEE /* good */,
 				6C62E8FC13D880A90010ED11 /* MainWindow.xib */,
 				6C62E90213D880A90010ED11 /* MainView.xib */,
 				6C62E8FF13D880A90010ED11 /* MainViewController.h */,
@@ -319,7 +316,6 @@
 				6C62E93B13D894DF0010ED11 /* logo.png in Resources */,
 				6C15852F13D9BA8C005C3697 /* config.con in Resources */,
 				6C15853113D9BAA8005C3697 /* config.plist in Resources */,
-				6C81979E13DDCB1000F1EFEE /* good in Resources */,
 				6CDCD1AD13E9843B009D0451 /* Info.plist in Resources */,
 				6CDCD1B613E98614009D0451 /* options.plist in Resources */,
 			);

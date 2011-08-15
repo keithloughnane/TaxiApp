@@ -12,12 +12,21 @@
 @implementation FlipsideViewController
 //@synthesize owner;
 @synthesize delegate=_delegate;
+//@synthesize mySettingsHandler;
 -(int)initWithOwner : (id) iowner
 {
         NSLog(@"Initing Flipside");
 	owner  = iowner;
+   // mySettingsHandler = [SettingsHandler alloc];
+   // [mySettingsHandler initWithOwner:self];
     
 	return 0;
+}
+-(int)setOwner: (id) iowner
+{
+    NSLog(@"setting owner in flip");
+    owner  = iowner;
+    return 0;
 }
 - (void)dealloc
 {
@@ -35,6 +44,10 @@
 {
     NSLog(@"MySegBTn = %d",[mySegBtn selectedSegmentIndex]);
     [owner setMode:[mySegBtn selectedSegmentIndex]];
+    //[mySettingsHandler setMode:[mySegBtn selectedSegmentIndex]];
+    //[mySettingsHandler SaveOptions];
+    
+   // [owner setMode:[mySegBtn selectedSegmentIndex]];
 }
 #pragma mark - View lifecycle
 

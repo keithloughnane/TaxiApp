@@ -36,8 +36,27 @@ MapControl *myMapControl;
 {
     owner = iMainView;
 }
+
+-(int)getUserID
+{
+    return userID;
+}
+
+-(int)setUserID:(int)iID
+{
+    userID = iID;
+}
+
+
+
+
 -(int)init:(id *) iMainView;
 {
+    
+    userID = [[[UIDevice currentDevice] uniqueIdentifier] intValue]; //userID;
+    NSLog(@"User ID S:%@",[[UIDevice currentDevice] uniqueIdentifier]);
+    NSLog(@"User ID I:%d",userID);
+
    // mode = 0;
 	//myDBControler = [DataBaseControler alloc];
 	//[myDBControler initWithOwner:self];
@@ -49,7 +68,7 @@ MapControl *myMapControl;
     myLocGetter  = [LocationGetter alloc];
     myNetCon = [netCon alloc];
     //myMainViewCon = [MainViewController alloc];
-    myFlipSideCon = [FlipsideViewController alloc];
+   // myFlipSideCon = [FlipsideViewController alloc];
     myMsgParser = [MessageParser alloc];
     myCurrentPickup = [CurrentPickup alloc];
     mySettingsHandler = [SettingsHandler alloc];
@@ -60,7 +79,7 @@ MapControl *myMapControl;
     
     
     [owner initWithOwner:self];
-    [myFlipSideCon initWithOwner:self];
+   // [myFlipSideCon initWithOwner:self];
     [myMsgParser initWithOwner:self];
     [myCurrentPickup initWithOwner:self];
     [mySettingsHandler initWithOwner:self];
@@ -69,12 +88,23 @@ MapControl *myMapControl;
     [mySettingsHandler LoadOptions];
     //Todo get IP from config and set
     [myNetCon init];
-    NSLog([myMsgParser getGetMessage]);
-    [self sendToNet:[myMsgParser getGetMessage]];
+    //NSLog([myMsgParser getGetMessage]);
+   
     
+    [self sendToNet:[myMsgParser getGetActivate]];
+    double loopInterval = 2.0;
+    [NSTimer scheduledTimerWithTimeInterval:(loopInterval) target:self selector:@selector(onTimer) userInfo:nil repeats:YES];	
+    
+
+
     
     
     return 0;
+}
+- (void)onTimer
+{
+    NSLog(@"Timer Called");
+    [self sendToNet:[myMsgParser getGetMessage]];
 }
 -(int) recNetMsg:(NSString*) str;
 {
@@ -84,6 +114,7 @@ MapControl *myMapControl;
 }
 -(int) setMode:(int)iMode
 {
+    NSLog(@"MainControl setting mode to %d",iMode);
     [mySettingsHandler setMode:iMode];
 }
 -(int)rcvPickupReqID:(int)ID llong:(double)ilong llat:(double)ilat;
@@ -114,7 +145,33 @@ MapControl *myMapControl;
     -(int) rcvPickupFailID:(int) iid msg:(NSString *) imsg;
 {
      NSLog(@"MSTRRECPICKFAIL:%d,%@",iid,imsg);
-    [self informUser:@"Sorry no cab enroute:%@",imsg];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    [owner showMsg:imsg];
+    
+    
+    
+    //[self informUser:@"Sorry no cab enroute:%@",imsg];
     [myCurrentPickup clear];
     return 0;
 }
@@ -183,6 +240,17 @@ MapControl *myMapControl;
     return curLat;
 
 }
+-(int) getOpMode
+{
+    return [mySettingsHandler getMode];
+}
+
+-(int) getCurPickupID
+{
+    
+    return [myCurrentPickup getID];
+}
+
 -(int)getsLoc : (double) locLat: (double) locLong : (double) locAlt: (double) LocHAccuracy :  (double) LocVAccuracy
 {
     NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
@@ -199,5 +267,12 @@ MapControl *myMapControl;
     
     return 0;
 }
+- (int) showMsg:(NSString *) msg
+{
+    NSLog(@"Main sending message to main view");
+    [owner showMsg:msg];
+    return 0;
+}
+
 
 @end

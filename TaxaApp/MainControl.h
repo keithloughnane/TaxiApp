@@ -20,6 +20,8 @@
     //DataBaseControler *myDBControler;
     int mode;//0=cleint; 1=master/taxi
     
+
+    
     LocationGetter *myLocGetter;
     netCon *myNetCon;
     id owner;
@@ -29,6 +31,8 @@
     SettingsHandler *mySettingsHandler;
     MapControl *myMapControl;
     double curLong, curLat, curVerr;
+    
+    int userID;
 
 }
 
@@ -41,7 +45,7 @@
 @property (retain, nonatomic) CurrentPickup *myCurrentPickup;
 @property (retain, nonatomic) SettingsHandler *mySettingsHandler;
 @property (retain, nonatomic) MapControl *myMapControl;
-
+@property  int userID;
 -(int)init:(id *) iMainView;
 -(int) reqPickup;
 -(int) sendToNet:(NSString *)msg;
