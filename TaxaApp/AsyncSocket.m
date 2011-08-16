@@ -2813,6 +2813,9 @@ Failed:;
 
 - (void)doCFReadStreamCallback:(CFStreamEventType)type forStream:(CFReadStreamRef)stream
 {
+    if(theReadStream == NULL)
+        return;
+    
 	NSParameterAssert(theReadStream != NULL);
 	
 	CFStreamError err;
@@ -2840,6 +2843,8 @@ Failed:;
 
 - (void)doCFWriteStreamCallback:(CFStreamEventType)type forStream:(CFWriteStreamRef)stream
 {
+    if(theWriteStream == NULL)
+        return;
 	NSParameterAssert(theWriteStream != NULL);
 	
 	CFStreamError err;

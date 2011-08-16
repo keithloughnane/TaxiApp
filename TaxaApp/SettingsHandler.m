@@ -23,7 +23,7 @@
 -(int)getMode
 {
     NSLog(@"Get Mode");
-    [self LoadOptions];
+    //[self LoadOptions];
     NSLog(@"Setting handeler return mode = %d",mode);
     return mode;
     

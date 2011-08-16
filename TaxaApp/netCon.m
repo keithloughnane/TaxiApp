@@ -76,7 +76,7 @@
 	NSData * d= [msg dataUsingEncoding:NSUTF8StringEncoding];
 	//[d initWithBytes: (Byte)@"hello" lenght:5];
 
-	
+    NSLog(@"Testing socket connection before read write");
     if(![mySocket isConnected])
     {
         NSLog(@"Socket not connected Trying Reconnect");
@@ -85,13 +85,14 @@
             [owner showMsg:@"Can not connect to server"];
         }
     }
-    
-    
+    else
+    {
+        NSLog(@"Socket appears connected doing read,write");
     [mySocket writeData:d withTimeout:10 tag:(long)2.3];
     
    // [mySocket readDataToData:[AsyncSocket ZeroData] withTimeout:30 tag:0];
     [mySocket readDataWithTimeout:10 tag:0];
-
+    }
 
 
 }
