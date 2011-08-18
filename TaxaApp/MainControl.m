@@ -126,22 +126,33 @@ MapControl *myMapControl;
     
     
     // TESTING ONLY
-    /*
-     //--Scenerio Taxi ID 123
-     
-     
-     
-    */
     
+     //--Scenerio Taxi ID 123
+     self.userID = @"123";
+     [mySettingsHandler setMode:1];
+     
+    //Far
+   // [self getsLoc :  :  :::0.0];
+    
+    [self getsLocLat : 52.308031 LLong:-9.661435 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    
+    //Not as Far
+   // [self getsLoc :  52.300626: -9.669943 :0.0:0.0:0.0];
+    
+    // less than 5 KM
+   // [self getsLoc :  52.291207: -9.672432 :0.0:0.0:0.0];
+    
+    // less than .5 KM
+    //[self getsLoc :  52.264812: -9.696929 :0.0:0.0:0.0];
     //--Scenerio Customer ID 100
     /*
      
-     
+     self.userID = @"100";
+     [mySettingsHandler setMode:0];
      
      */
     
-    self.userID = 100;
-    [mySettingsHandler setMode:0];
+
     
     
     
@@ -311,7 +322,7 @@ MapControl *myMapControl;
     return [myCurrentPickup getID];
 }
 
--(int)getsLoc : (double) locLat: (double) locLong : (double) locAlt: (double) LocHAccuracy :  (double) LocVAccuracy
+-(int)getsLocLat : (double)locLat LLong:(double)locLong Alt:(double)locAlt LocHacc:(double)LocHAccuracy LocVacc:(double)LocVAccuracy
 {
     NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
     

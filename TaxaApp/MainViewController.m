@@ -38,8 +38,8 @@
     [myMain recNetMsg:@"jiminy"];
     
    //[myMain MainControl];
-    location.latitude = 0.000;
-	location.longitude = 0.000;	
+    location.latitude = 0.0;
+	location.longitude = 0.0;	
 	[myMap setCenterCoordinate:location];
 	MKCoordinateRegion region;
     MKCoordinateSpan span;
