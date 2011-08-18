@@ -31,31 +31,64 @@ MapControl *myMapControl;
 @synthesize myCurrentPickup;
 @synthesize mySettingsHandler;
 @synthesize myMapControl;
+@synthesize userID;
 
 -(int)setMainView:(id *) iMainView
 {
     owner = iMainView;
 }
 
--(int)getUserID
+-(NSString *)getUserID
 {
+    NSLog(@"About to return user ID");
+    NSLog(@"getUserId is returning %@",userID);
     return userID;
 }
 
--(int)setUserID:(int)iID
-{
-    userID = iID;
-}
 
+-(int) getPickupID
+{
+    NSLog(@"Get pickupID returning %d",[myCurrentPickup getID]);
+    return [myCurrentPickup getID];
+}
 
 
 
 -(int)init:(id *) iMainView;
 {
+    self.userID = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] uniqueIdentifier]];
     
-    userID = [[[UIDevice currentDevice] uniqueIdentifier] intValue]; //userID;
-    NSLog(@"User ID S:%@",[[UIDevice currentDevice] uniqueIdentifier]);
-    NSLog(@"User ID I:%d",userID);
+    
+    
+    
+    
+    //userID = [[UIDevice currentDevice] uniqueIdentifier]; //userID;
+    
+    //userID = [[[NSUserDefaults standardUserDefaults] stringForKey:@"SBFormattedPhoneNumber"] intValue];
+    
+  //  userID = 0;
+
+   // for(int i = 0; i < [[[UIDevice currentDevice] uniqueIdentifier] length]; i++)
+   // {
+    NSLog(@"User ID S:%S",userID);
+       /* if([[[UIDevice currentDevice] uniqueIdentifier] characterAtIndex:i] < 10)
+        {
+                userID += [[[UIDevice currentDevice] uniqueIdentifier] characterAtIndex:i]*100;
+        }
+        else if([[[UIDevice currentDevice] uniqueIdentifier] characterAtIndex:i] < 100)
+        {
+            userID += [[[UIDevice currentDevice] uniqueIdentifier] characterAtIndex:i]*10;
+        }
+        else*/
+       // userID *= 1000;
+           // userID += [[[UIDevice currentDevice] uniqueIdentifier] characterAtIndex:i];
+
+       // NSLog(@"Char = %d",[[[UIDevice currentDevice] uniqueIdentifier] characterAtIndex:i]);
+   // NSLog(@"User ID I:%d",userID);
+
+        
+        
+   // }
 
    // mode = 0;
 	//myDBControler = [DataBaseControler alloc];
@@ -88,7 +121,34 @@ MapControl *myMapControl;
     [mySettingsHandler LoadOptions];
     //Todo get IP from config and set
     [myNetCon init];
-    //NSLog([myMsgParser getGetMessage]);
+   // NSLog([myMsgParser getGetMessage]);
+    
+    
+    
+    // TESTING ONLY
+    /*
+     //--Scenerio Taxi ID 123
+     
+     
+     
+    */
+    
+    //--Scenerio Customer ID 100
+    /*
+     
+     
+     
+     */
+    
+    self.userID = 100;
+    [mySettingsHandler setMode:0];
+    
+    
+    
+    
+    
+    
+    
    
     
     [self sendToNet:[myMsgParser getGetActivate]];

@@ -32,7 +32,7 @@
     MapControl *myMapControl;
     double curLong, curLat, curVerr;
     
-    int userID;
+    NSString * userID;
 
 }
 
@@ -45,7 +45,7 @@
 @property (retain, nonatomic) CurrentPickup *myCurrentPickup;
 @property (retain, nonatomic) SettingsHandler *mySettingsHandler;
 @property (retain, nonatomic) MapControl *myMapControl;
-@property  int userID;
+@property  (retain, nonatomic)  NSString * userID;
 -(int)init:(id *) iMainView;
 -(int) reqPickup;
 -(int) sendToNet:(NSString *)msg;
