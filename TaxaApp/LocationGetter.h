@@ -10,18 +10,14 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface LocationGetter : NSObject
+
 <CLLocationManagerDelegate>{
 	id *owner;
-
 	CLLocationManager	*locationManager;	
-	CLLocation	*startingPoint;
-
-	
+	CLLocation	*startingPoint;	
 }
-//@property (retain, nonatomic) id *owner;
+
 @property (retain, nonatomic) CLLocationManager	*locationManager;
 @property (retain, nonatomic) CLLocation *startingPoint;
-
 -(int)initWithOwner : (id) ownerl;
-
 @end

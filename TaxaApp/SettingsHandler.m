@@ -16,7 +16,7 @@
 {
         NSLog(@"Initing Settings Handler");
        owner  = iowner;
-  mode = 0;
+  mode = -1;
     
 	return 0;
 }
@@ -67,6 +67,7 @@
     NSLog(@"mode being set to %d",iMode);
     mode = iMode;
     [self SaveOptions];
+    return 0;
 }
 
 -(int)LoadOptions
@@ -111,7 +112,7 @@
         //newString = [newString stringByAppendingString:tempString];				
         NSLog(@"count = %i", [array count]);
         
-        NSNumber *numx;			
+       // NSNumber *numx;			
         //LEVEL
         NSLog(@"Options manager loading mode currently :%d",mode);
         mode = [[array objectAtIndex:0] intValue];

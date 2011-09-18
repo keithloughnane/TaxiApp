@@ -8,11 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface MessageParser : NSObject {
     	id owner;
 }
+
 -(int)initWithOwner : (id) owner;
+-(NSString *) getGetMessage;
+-(NSString *) getSetPositionMsg;
+-(NSString *) getReqPickupMsg;
+-(NSString *) getAccPickupMsg;
+-(NSString *) getRefusePickupMsg;
+-(NSString *) getGetActivate;
+-(NSString *) getGetDeacitivate;
 -(int)recieveMsg: (NSString *) msg;
 -(NSString *) getGetMessage;
 @end

@@ -12,14 +12,15 @@
 @implementation FlipsideViewController
 //@synthesize owner;
 @synthesize delegate=_delegate;
+@synthesize latTextView;
+@synthesize longTextView;
+@synthesize btnGPS;
+
 //@synthesize mySettingsHandler;
 -(int)initWithOwner : (id) iowner
 {
-        NSLog(@"Initing Flipside");
+    NSLog(@"Initing Flipside");
 	owner  = iowner;
-   // mySettingsHandler = [SettingsHandler alloc];
-   // [mySettingsHandler initWithOwner:self];
-    
 	return 0;
 }
 -(int)setOwner: (id) iowner
@@ -28,6 +29,26 @@
     owner  = iowner;
     return 0;
 }
+
+- (IBAction)textFieldReturn:(id)sender
+{
+    //NSLog(@"textFieldReturn,%f",[[APRField text] floatValue]);
+    
+   // [self setValues];
+    
+    
+    [sender resignFirstResponder];
+}
+
+- (IBAction)GPSSet:(id)sender
+{
+    
+    NSLog(@"SETTING GPS %f %f",[longTextView.text doubleValue] ,[latTextView.text doubleValue]);
+    //[owner getsLoc :  52.300626: -9.669943 :0.0:0.0:0.0];
+    [owner getsLocLat : [longTextView.text doubleValue] LLong:[latTextView.text doubleValue] Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    
+}
+
 - (void)dealloc
 {
     [super dealloc];
@@ -44,10 +65,8 @@
 {
     NSLog(@"MySegBTn = %d",[mySegBtn selectedSegmentIndex]);
     [owner setMode:[mySegBtn selectedSegmentIndex]];
-    //[mySettingsHandler setMode:[mySegBtn selectedSegmentIndex]];
-    //[mySettingsHandler SaveOptions];
+        [owner activate];
     
-   // [owner setMode:[mySegBtn selectedSegmentIndex]];
 }
 #pragma mark - View lifecycle
 

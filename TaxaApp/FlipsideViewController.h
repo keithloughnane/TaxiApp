@@ -15,22 +15,36 @@
 	id owner;
     //SettingsHandler *mySettingsHandler;
     IBOutlet UISegmentedControl *mySegBtn;
+    
+    IBOutlet UITextField *longTextView;
+    IBOutlet UITextField *latTextView;
+    
+    IBOutlet UIButton *btnGPS;
 }
-@property (nonatomic,retain) UIButton *btnCan;
+@property (nonatomic,retain) UIButton *btnGPS;
 //@property (retain, nonatomic) SettingsHandler *mySettingsHandler;
--(IBAction)segChange:(id)sender;
 
--(int)initWithOwner : (id) owner;
+@property (retain, nonatomic) UITextField *longTextView;
+@property (retain, nonatomic) UITextField *latTextView;
+
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
 
+-(int)initWithOwner : (id) iowner;
+-(int)setOwner: (id) iowner;
+- (void)dealloc;
+- (void)viewDidLoad;
+- (void)viewDidUnload;
 - (IBAction)done:(id)sender;
+-(IBAction)segChange:(id)sender;
+-(int)initWithOwner : (id) owner;
+- (IBAction)done:(id)sender;
+- (void)didReceiveMemoryWarning;
+- (IBAction)GPSSet:(id)sender;
+- (IBAction)textFieldReturn:(id)sender;
 
 @end
 
-
-
 @protocol FlipsideViewControllerDelegate
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
-
 
 @end

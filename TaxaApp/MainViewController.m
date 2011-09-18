@@ -10,34 +10,30 @@
 
 
 @implementation MainViewController;
-//@synthesize owner;
 @synthesize managedObjectContext=_managedObjectContext;
 @synthesize myMap;
 @synthesize myMain;
 @synthesize myTextView;
+@synthesize btnAcc;
+@synthesize btnCan;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 -(int)initWithOwner : (id) iowner
 {
     NSLog(@"seting owner in MainView");
 	owner  = iowner;
-    
 	return 0;
 }
 
 - (void)viewDidLoad
 {
+    
     NSLog(@"seting owner in MainView");
     mode = 0;
-    
     [myTextView setText:@"Test"];
-    
     myMain  = [[MainControl alloc] init:self];
     [myMain setMainView:self];
     
-    [myMain recNetMsg:@"jiminy"];
-    
-   //[myMain MainControl];
     location.latitude = 0.0;
 	location.longitude = 0.0;	
 	[myMap setCenterCoordinate:location];
@@ -50,64 +46,37 @@
 	region.span=span;
 	[myMap setRegion:region animated:TRUE];	
     [myMap setCenterCoordinate:location];
-    
-    
-    
-   // DisplayMap *ann = [[DisplayMap alloc] init]; 
-//ann.title = @" Pin 1";
-   // ann.subtitle = @"The Subtitle!"; 
-    //ann.coordinate = region.center; 
-    //[mapView addAnnotation:ann];
-    MKPlacemark *pickPlace = [[MKPlacemark alloc]initWithCoordinate:location addressDictionary:[[NSDictionary alloc] init]];
-	[myMap addAnnotation:pickPlace];
+    [self setPin];
 
-
-    
-    
-    
     [self showInfo:self];
-    
     [super viewDidLoad];
 }
+
 -(int)getsLoc : (double) locLat: (double) locLong : (double) locAlt: (double) LocHAccuracy :  (double) LocVAccuracy
 {
-        NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
-   // NSLog(<#NSString *format, ...#>)
+    NSLog(@"Main view Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
 	NSLog(@"GETS LOC METHOD CALLED %f, %f",locLat,locLong);
-    
-   // [owner getsLoc:locLat :locLong :locAlt :LocHAccuracy :LocVAccuracy];
-    
-    
-	//NSLog(@"Undating lable");
-	//NSString statusTemp =  @"LOC %f %f",locLat,locLong;
-	//statusText.text = statusTemp;
-	//NSLog(@"Undating save");
-	
-	//-(int)saveDataPoint: (NSString *) datetime : (NSString *) datatype : (double) floatData: (NSString *) stringData : (double) errorMargin;
-	
-	//int time = [self getTime];
-	//[myDBControler saveDataPoint:[self getTime]:@"LOCLAT":locLat:@"0":LocHAccuracy];
-	//int time = [self getTime];
-	//[myDBControler saveDataPoint:[self getTime]:@"LOCLONG":locLong:@"0":LocHAccuracy];
-	//int time = [self getTime];
-	//[myDBControler saveDataPoint:[self getTime]:@"LOCALT":locAlt:@"0":LocVAccuracy];
-	//NSLog(@"Done");
-	//location 
-	//locStatus =[NSString stringWithFormat:@"Location:\n\tlong:%f\n\tlat:%f",locLong,locLat];
-	//statusText.text = [NSString stringWithFormat:@"%f %@ %@",[self getTime],locStatus,accStatus];
-    
-    [self upDateLocLong:locLong Lat:locLat:LocHAccuracy];
-    
+    [self upDateLocLong:locLong Lat:locLat Verr:0.0];
     
 	return 0;
 }
 
+-(int) setPin
+{
+    MKPlacemark *pickPlace = [[MKPlacemark alloc]initWithCoordinate:location addressDictionary:[[NSDictionary alloc] init]];
+	[myMap addAnnotation:pickPlace];
+}
+
 - (int) upDateLocLong:(double) locLong Lat:(double)locLat Verr:(double)LocVAccuracy
 {
-    location.latitude = locLong;
-	location.longitude = locLat;	
+    NSLog(@"- (int) upDateLocLong:(double) %f Lat:(double)%f Verr:(double)LocVAccuracy",locLong,locLat);
+    location.latitude = locLat;
+	location.longitude = locLong;	
 	[myMap setCenterCoordinate:location];
-	MKCoordinateRegion region;
+	
+    
+    
+    MKCoordinateRegion region;
     MKCoordinateSpan span;
     region.center=myMap.region.center;
 	
@@ -116,7 +85,10 @@
 	region.span=span;
 	[myMap setRegion:region animated:TRUE];	
     [myMap setCenterCoordinate:location];
-
+ 
+    [self setPin];
+    
+    return 0;
 }
 
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
@@ -151,6 +123,8 @@
     
     NSLog(@"Reject Clicked");
     
+    if(mode == 2)
+        [owner rejectPickupReq];
     [self returnToStandby];
 }
 - (int)returnToStandby
@@ -158,6 +132,8 @@
     [myTextView setHidden:true];
     [btnAcc setHidden:true];
     [btnCan setHidden:true];
+    
+    return 0;
 }
 
 - (int)recReqPickup:(NSString *) msg
@@ -168,6 +144,8 @@
     [myTextView setHidden:false];
     [btnAcc setHidden:false];
     [btnCan setHidden:false];
+    
+    return 0;
 }
 
 - (IBAction)reqPickup:(id)sender;
@@ -179,12 +157,7 @@
     [btnAcc setHidden:false];
     [btnCan setHidden:false];
     
-    
-    
-    
-    
     //[owner reqPickup];
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -224,6 +197,18 @@
     [myTextView setHidden:false];
     [btnAcc setHidden:false];
     
+    return 0;
     
 }
 @end
+
+
+
+
+
+
+
+
+
+
+

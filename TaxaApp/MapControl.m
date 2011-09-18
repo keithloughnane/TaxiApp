@@ -13,7 +13,7 @@
 //@synthesize owner;
 -(int)initWithOwner : (id) iowner
 {
-        NSLog(@"Initing MapControl");
+    NSLog(@"Initing MapControl");
 	owner  = iowner;
     
 	return 0;

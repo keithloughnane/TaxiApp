@@ -13,17 +13,13 @@
 //@synthesize owner;
 -(int)initWithOwner : (id) iowner
 {
-        NSLog(@"Initing MessageParser");
+    NSLog(@"Initing MessageParser");
 	owner  = iowner;
     
     //[owner setUserID:-1];
     
     NSLog(@"UserID = %@",[owner getUserID]);
-    NSLog(@"PickUpID = %d",[owner getCurPickupID]);
-    
-    
-    
-    
+   // NSLog(@"PickUpID = %d",[owner getCurPickupID]);
 	return 0;
 }
 -(NSString *) getGetMessage
@@ -36,14 +32,15 @@
     
     return msgMsg;
 }
--(NSString *) getSetPositionMsg
+-(NSString *) getSetPositionMsgllat:(double)locLat llong:(double)locLong
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=setPosition&id=%@&llong=%f&llat=%f",[owner getUserID],[owner getLong],[owner getLat]];
+    NSLog(@"In get Set Positon lat %f  long %f", locLat , locLong);
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=setPosition&id=%@&llong=%f&llat=%f",[owner getUserID],locLong,locLat];
     return msgMsg;
 }
--(NSString *) getReqPickupMsg
+-(NSString *) getReqPickupMsg:(double)locLat llong:(double)locLong
 {
-    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=requestPickup&id=%@&llong=%f&llat=%f",[owner getUserID],[owner getLong],[owner getLat]];
+    NSString * msgMsg = [[NSString alloc]initWithFormat:@"/server.php?msgtype=requestPickup&id=%@&llong=%f&llat=%f",[owner getUserID],locLat,locLong];
     return msgMsg;
 }
 -(NSString *) getAccPickupMsg
@@ -72,7 +69,7 @@
 -(int)recieveMsg:(NSString *) msg
 {
     NSLog(@"Message Parser recieved");
-    //NSLog(msg);
+    NSLog(msg);
     msg = [msg stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n"];
         NSLog(msg);
     NSArray* components = [msg componentsSeparatedByString:@"\n"];
@@ -113,8 +110,6 @@
             //startReading = false;
             //convert lcomp[1&2] to double and pass
             [owner rcvPickupReqID:[[loopComponents objectAtIndex:1] intValue] llong:[[loopComponents objectAtIndex:2] doubleValue] llat: [[loopComponents objectAtIndex:3] doubleValue]];
-            
-            
             break;
         }
             if(![[loopComponents objectAtIndex:0] compare:@"PICKACC"])
@@ -123,8 +118,6 @@
                 //startReading = false;
                 //convert lcomp[1&2] to double and pass
                 [owner rcvPickupAccID:[[loopComponents objectAtIndex:1] intValue] ];
-                
-                
                 break;
             }
             if(![[loopComponents objectAtIndex:0] compare:@"PICKFAIL"])
@@ -133,8 +126,6 @@
                 //startReading = false;
                 //convert lcomp[1&2] to double and pass
                 [owner rcvPickupFailID:[[loopComponents objectAtIndex:1] intValue] msg:[loopComponents objectAtIndex:2]];
-                
-                
                 break;
             }
             if(![[loopComponents objectAtIndex:0] compare:@"PICKCAN"])
@@ -143,8 +134,6 @@
                 //startReading = false;
                 //convert lcomp[1&2] to double and pass
                 [owner rcvPickupCanID:[[loopComponents objectAtIndex:1] intValue]];
-                
-                
                 break;
             }
             if(![[loopComponents objectAtIndex:0] compare:@"PICKARR"])
@@ -152,9 +141,7 @@
                 NSLog(@"FIND PRICKARR");
                 //startReading = false;
                 //convert lcomp[1&2] to double and pass
-                [owner rcvPickupArrID:[[loopComponents objectAtIndex:1] intValue]];
-                
-                
+                [owner rcvPickupArrID:06];
                 break;
             }
             if(![[loopComponents objectAtIndex:0] compare:@"PICKNEAR"])
@@ -162,65 +149,13 @@
                 NSLog(@"FIND PRICKNEAR");
                 //startReading = false;
                 //convert lcomp[1&2] to double and pass
-                [owner rcvPickupNearID:[[loopComponents objectAtIndex:1] intValue]];
-                
-                
+                [owner rcvPickupNearID:0];
                 break;
             }
-
             //END MESSAGE READING IF
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
-    
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    //if(![Stype compare:@"LOCLAT"])
-    
-    
-    
     return 0;
 }
-//if(![Stype compare:@"LOCLAT"])
-//{
-//}
+
 @end

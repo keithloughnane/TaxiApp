@@ -15,8 +15,18 @@
     int pickupStatus; //-1 = nothing setup, 0= setup but not accepted or reqected waiting, 1= accepted. minus values other than -1 are errors.
     double llong, llat;
     double ETA;
-    
 }
+
 -(int)initWithOwner : (id) owner;
+-(int) setUpMasterModeID:(int)ID llong:(double)ilong llat:(double)ilat;
+-(int) getStatus;
+-(int) setStatus:(int)iStatus;
+- (int) setUpClientModeID:(int)ID llong:(double)ilong llat:(double)ilat;
+-(double)getLLong;
+-(double)getLLat;
+-(int)getID;
+-(int) setAcceptedServerMode:(int) iStatus;
+-(int) setAcceptedClientMode:(int) iStatus;
+-(int) clear;
 
 @end

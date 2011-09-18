@@ -32,17 +32,20 @@ MapControl *myMapControl;
 @synthesize mySettingsHandler;
 @synthesize myMapControl;
 @synthesize userID;
+@synthesize  curLong, curLat, curVerr;
 
 -(int)setMainView:(id *) iMainView
 {
     owner = iMainView;
+    
+    return 0;
 }
 
 -(NSString *)getUserID
 {
     NSLog(@"About to return user ID");
     NSLog(@"getUserId is returning %@",userID);
-    return userID;
+    return self.userID;
 }
 
 
@@ -52,10 +55,19 @@ MapControl *myMapControl;
     return [myCurrentPickup getID];
 }
 
+-(int) activate
+{
+        [self sendToNet:[myMsgParser getGetActivate]];
+    //self.curLat = locLat;
+    //.curLong = locLong;
+     [self sendToNet:[myMsgParser getSetPositionMsgllat: self.curLat llong: self.curLong]];
+}
 
 
 -(int)init:(id *) iMainView;
 {
+    curLat = 1.0;
+    curLong = 1.0;
     self.userID = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] uniqueIdentifier]];
     
     
@@ -125,32 +137,9 @@ MapControl *myMapControl;
     
     
     
-    // TESTING ONLY
-    
-     //--Scenerio Taxi ID 123
-     self.userID = @"123";
-     [mySettingsHandler setMode:1];
+
      
-    //Far
-   // [self getsLoc :  :  :::0.0];
-    
-    [self getsLocLat : 52.308031 LLong:-9.661435 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
-    
-    //Not as Far
-   // [self getsLoc :  52.300626: -9.669943 :0.0:0.0:0.0];
-    
-    // less than 5 KM
-   // [self getsLoc :  52.291207: -9.672432 :0.0:0.0:0.0];
-    
-    // less than .5 KM
-    //[self getsLoc :  52.264812: -9.696929 :0.0:0.0:0.0];
-    //--Scenerio Customer ID 100
-    /*
-     
-     self.userID = @"100";
-     [mySettingsHandler setMode:0];
-     
-     */
+
     
 
     
@@ -159,15 +148,41 @@ MapControl *myMapControl;
     
     
     
-    
+    NSLog(@"About to send activate to net %@", [myMsgParser getGetActivate]);
    
     
-    [self sendToNet:[myMsgParser getGetActivate]];
+
     double loopInterval = 2.0;
     [NSTimer scheduledTimerWithTimeInterval:(loopInterval) target:self selector:@selector(onTimer) userInfo:nil repeats:YES];	
     
+    // TESTING ONLY
+    
+    //--Scenerio Taxi ID 123
+    //self.userID = @"123";
+    //[mySettingsHandler setMode:1];
+    
+    //Far
+    // [self getsLoc :  :  :::0.0];
+    //self.userID = @"123";
+   // [mySettingsHandler setMode:0];
+    [self activate];
+    //[self getsLocLat : 52.308031 LLong:-9.661435 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    
+    //Not as Far
+    // [self getsLoc :  52.300626: -9.669943 :0.0:0.0:0.0];
+    
+    // less than 5 KM
+    // [self getsLoc :  52.291207: -9.672432 :0.0:0.0:0.0];
+    
+    // less than .5 KM
+   // [self getsLoc :  52.264812: -9.696929 :0.0:0.0:0.0];
+     //[self getsLocLat : 52.264812 LLong:-9.696929 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    
+    //--Scenerio Customer ID 100
+    
 
-
+     
+     
     
     
     return 0;
@@ -175,6 +190,39 @@ MapControl *myMapControl;
 - (void)onTimer
 {
     NSLog(@"Timer Called");
+    
+    
+    // TESTING ONLY
+    
+    //--Scenerio Taxi ID 123
+    //self.userID = @"100";
+    //[mySettingsHandler setMode:0];
+    
+    //Far
+    // [self getsLoc :  :  :::0.0];
+    [self activate];
+    //[self getsLocLat : 52.264812 LLong:-9.696929 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+  //[self getsLocLat : 52.308031 LLong:-9.661435 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    
+    //Not as Far
+   // [self getsLocLat : 52.300626 LLong: -9.669943 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    // [self getsLoc :  52.300626: -9.669943 :0.0:0.0:0.0];
+    
+    // less than 5 KM
+    //[self getsLocLat : 52.291207 LLong:-9.672432 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    // [self getsLoc :  52.291207: -9.672432 :0.0:0.0:0.0];
+    
+    // less than .5 KM
+   // [self getsLocLat : 52.264812 LLong:-9.696929 Alt:0.0 LocHacc:0.0 LocVacc:0.0];
+    //[self getsLoc :  52.264812: -9.696929 :0.0:0.0:0.0];
+    //--Scenerio Customer ID 100
+    /*
+     self.userID = @"100";
+     [mySettingsHandler setMode:0];
+     
+     */
+    
+    
     [self sendToNet:[myMsgParser getGetMessage]];
 }
 -(int) recNetMsg:(NSString*) str;
@@ -187,20 +235,27 @@ MapControl *myMapControl;
 {
     NSLog(@"MainControl setting mode to %d",iMode);
     [mySettingsHandler setMode:iMode];
+return 0;
 }
 -(int)rcvPickupReqID:(int)ID llong:(double)ilong llat:(double)ilat;
-{
+{    [self getsLocLat : ilat LLong:ilong Alt:0.0 LocHacc:(double)0.0 LocVacc:0.0];
     NSLog(@"MSTRRECPICKREQ:%d,%f,%f",ID,ilong,ilong);
     
     [myCurrentPickup clear];
     [myCurrentPickup setUpMasterModeID:ID llong:ilong llat:ilat];
     [self askUserConfirmPickup];
     
+    
+    /* Set up lable */
+    
+    
+    
+    
     return 0;
 }
 -(int) askUserConfirmPickup
 {
-    [owner reqPickup:@"Recieved pickup Request Accept?"];
+    [owner recReqPickup:@"Recieved pickup Request Accept?"];
     return 0;
 }
 
@@ -208,7 +263,7 @@ MapControl *myMapControl;
 {
      NSLog(@"MSTRRECPICKACC:%d",iid);
     
-    [myCurrentPickup setAcceptedClientMode];
+    [myCurrentPickup setAcceptedClientMode:1];
     return 0;
 }
     
@@ -217,30 +272,7 @@ MapControl *myMapControl;
 {
      NSLog(@"MSTRRECPICKFAIL:%d,%@",iid,imsg);
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     [owner showMsg:imsg];
-    
-    
     
     //[self informUser:@"Sorry no cab enroute:%@",imsg];
     [myCurrentPickup clear];
@@ -248,11 +280,12 @@ MapControl *myMapControl;
 }
 -(int) reqPickup
 {
-    NSLog(@"Main->ReqPickup");
-        NSString * tempString = [NSString stringWithFormat:@"%@",[myMsgParser getReqPickupMsg]];
+    NSLog(@"Main->ReqPickup %f %f", curLong, self.curLat);
+        NSString * tempString = [NSString stringWithFormat:@"%@",[myMsgParser getReqPickupMsg: curLat llong: curLong]];
     
     
     [self sendToNet:tempString];
+    return 0;
 }
     
 
@@ -267,23 +300,35 @@ MapControl *myMapControl;
 {
     NSLog(@"MSTRRECPICKArr:%d",iid);
     //[myCurrentPickup clear];
-    [self infromUser:@"Your Taxi has arrived."];
+    [owner showMsg:@"Taxi has arrived."];
+    
     //TODO Vibrate
+    [myCurrentPickup setStatus:-2];
     return 0;
 }
 -(int) rcvPickupNearID:(int) iid;
 {
     NSLog(@"MSTRRECPICKNear:%d",iid);
     //[myCurrentPickup clear];
-    [self infromUser:@"Your Taxi is nearly here."];
+    [owner showMsg:@"Your Taxi is nearly here."];
      //TODO Vibrate
     return 0;
 }
 
 -(int) acceptPickupReq
 {
+    
     NSLog(@"Accept pickup req called");
+    [myCurrentPickup setAcceptedServerMode:1];
+    [self sendToNet:[myMsgParser getAccPickupMsg]];
+    return 0;
 }
+     
+     -(int) rejectPickupReq
+     {
+         [self sendToNet:[myMsgParser getRefusePickupMsg]];
+         return 0;
+     }
     
 ///server.php?msgtype=getMessages&id=1
 
@@ -291,24 +336,35 @@ MapControl *myMapControl;
 {
 
     NSLog(@"send to net called");
-        NSLog(@"1");
-    NSString * tempString = [NSString stringWithFormat:@"GET %@ HTTP/1.1\nHost: 192.168.2.4\nConnection: keep-alive\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Encoding: gzip,deflate,sdch\nAccept-Language: en-US,en;q=0.8\nAccept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3\n\n",msg];
+        NSLog(@"N1");
+    NSString * tempString = [NSString stringWithFormat:@"GET %@ HTTP/1.1\nHost: needataxinow.com\nConnection: keep-alive\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\nAccept-Encoding: gzip,deflate,sdch\nAccept-Language: en-US,en;q=0.8\nAccept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3\n\n",msg];
 
     //[tempString alloc];
-    NSLog(@"2");
-    NSLog(@"3");
+    NSLog(@"N2");
+    NSLog(@"N3");
+  //  if ([myNetCon isConnected])
+    {
     [myNetCon sendData:tempString];
-    NSLog(@"4");
-    return 0;
+        NSLog(@"N4");
+        return 0;
+    }
+   /* else
+    {
+        NSLog(@"4B");
+        return -1;
+    }*/
+
 }
 -(double) getLong
 {
-    return curLong;
+    return self.curLong;
+ 
     
 }
 -(double) getLat
 {
-    return curLat;
+    return self.curLat;
+
 
 }
 -(int) getOpMode
@@ -326,13 +382,15 @@ MapControl *myMapControl;
 {
     NSLog(@"Current Loc->Long:%f  Lat:%f  Alt:%f  HAccuracy:%f   VAccuracy:%f",locLong,locLat,locAlt,LocHAccuracy,LocVAccuracy);
     
-    if(!([myCurrentPickup getStatus] == -1))
-    {
-    curLat = locLat;
-    curLong = locLong;
-    curVerr = LocVAccuracy;
-    	[owner getsLoc :  locLat: locLong:locAlt:LocHAccuracy:LocVAccuracy];
-    }
+    //if(([myCurrentPickup getStatus] == -1))
+    //{
+    self.curLat = locLat;
+    self.curLong = locLong;
+    self.curVerr = LocVAccuracy;
+    [owner getsLoc :  locLat: locLong:locAlt:LocHAccuracy:LocVAccuracy];
+
+    [self sendToNet:[myMsgParser getSetPositionMsgllat: locLat llong: locLong]];
+    //}
    // [owner upDateLocLong:locLong Lat:locLat Verr:LocVAccuracy];
     
     

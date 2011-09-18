@@ -27,7 +27,12 @@
 {
     // Override point for customization after application launch.
     // Add the main view controller's view to the window and display.
-    self.window.rootViewController = self.mainViewController;
+    
+    NSLog(@"App Started");
+   // self.window.rootViewController = self.mainViewController;
+   
+    [self.window addSubview:self.mainViewController.view];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -16,7 +16,7 @@
         NSLog(@"Initing CurrentPickup");
 	owner  = iowner;
     
-    pickupId = -2;
+    pickupId = -2;  //-2 defualt not read, -1 waiting decition, 1 on pickup
     
     NSLog(@"CurrentPickup ID set to %d",[self getID]);
     
@@ -58,17 +58,17 @@ return 0;
 {
     return llong;
 }
+
 -(double)getLLat
 {
     return llat;
 }
+
 -(int)getID
 {
     NSLog(@"Getting Pickup ID %d",pickupId);
     return pickupId;
 }
-
-
 
 -(int) setAcceptedServerMode:(int) iStatus
 {
@@ -86,6 +86,6 @@ return 0;
 
 -(int) clear
 {
-    
+    return 0;
 }
 @end
