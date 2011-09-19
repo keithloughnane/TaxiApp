@@ -97,12 +97,18 @@
 }
 
 - (IBAction)showInfo:(id)sender
-{    
+{   
+    NSLog(@"ShowInfo Click 1");
     FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
+        NSLog(@"ShowInfo Click 2");
     controller.delegate = self;
+        NSLog(@"ShowInfo Click 3");
     [controller setOwner:owner];
+        NSLog(@"ShowInfo Click 4");
     controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        NSLog(@"ShowInfo Click 5");
     [self presentModalViewController:controller animated:YES];
+        NSLog(@"ShowInfo Click 6");
     
     [controller release];
 }

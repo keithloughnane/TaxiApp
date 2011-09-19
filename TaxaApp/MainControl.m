@@ -131,7 +131,7 @@ MapControl *myMapControl;
     [myMapControl initWithOwner:self];
     //[mySettingsHandler SaveOptions];
     [mySettingsHandler LoadOptions];
-    //Todo get IP from config and set
+    
     [myNetCon init];
    // NSLog([myMsgParser getGetMessage]);
     
@@ -302,7 +302,7 @@ return 0;
     //[myCurrentPickup clear];
     [owner showMsg:@"Taxi has arrived."];
     
-    //TODO Vibrate
+    
     [myCurrentPickup setStatus:-2];
     return 0;
 }
@@ -311,7 +311,7 @@ return 0;
     NSLog(@"MSTRRECPICKNear:%d",iid);
     //[myCurrentPickup clear];
     [owner showMsg:@"Your Taxi is nearly here."];
-     //TODO Vibrate
+    
     return 0;
 }
 

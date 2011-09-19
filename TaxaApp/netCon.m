@@ -40,7 +40,8 @@
         NSLog(@"Socket not connected Trying Reconnect");
         if([mySocket connectToHost:serverAdd onPort:80 error:[NSError alloc]])
         {
-            [owner showMsg:@"Can not connect to server"];
+            NSLog(@"Cannot Connect to server");
+           // [owner showMsg:@"Can not connect to server"];
         }
     }
     else
