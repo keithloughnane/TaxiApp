@@ -113,7 +113,7 @@
 					</object>
 					<object class="IBUITextField" id="116556756">
 						<reference key="NSNextResponder" ref="249263867"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{14, 383}, {186, 31}}</string>
 						<reference key="NSSuperview" ref="249263867"/>
 						<reference key="NSWindow"/>
@@ -140,7 +140,7 @@
 					</object>
 					<object class="IBUITextField" id="444669977">
 						<reference key="NSNextResponder" ref="249263867"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{14, 416}, {186, 31}}</string>
 						<reference key="NSSuperview" ref="249263867"/>
 						<reference key="NSWindow"/>
@@ -180,11 +180,10 @@
 					</object>
 					<object class="IBUIButton" id="475478081">
 						<reference key="NSNextResponder" ref="249263867"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{208, 415}, {105, 31}}</string>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{208, 416}, {105, 31}}</string>
 						<reference key="NSSuperview" ref="249263867"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
 							<string key="IBUIAccessibilityLabel">Set GS</string>
@@ -345,10 +344,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="871675769"/>
 							<reference ref="1069858653"/>
-							<reference ref="475478081"/>
 							<reference ref="6132498"/>
 							<reference ref="116556756"/>
 							<reference ref="444669977"/>
+							<reference ref="475478081"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
